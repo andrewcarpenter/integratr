@@ -1,0 +1,24 @@
+<h1><%= @project.name %></h1>
+
+<h2>Untracked</h2>
+<ul>
+<% @project.status.untracked.each do |path, status| %>
+  <li><%= path %></li>
+<% end %>
+</ul>
+
+<h2>Changed</h2>
+<ul>
+<% @project.status.changed.each do |path, status| %>
+  <li><%= path %></li>
+<% end %>
+</ul>
+
+<% if @error_message %>
+  <div class="error_message"><%= @error_message %></div>
+<% end %>
+
+<form action="/projects/<%= @project.slug %>/commits" method="post">
+  <textarea name="message" rows="10" cols="40"><%= @message %></textarea>
+  <input type="submit" value="Commit">
+</form>

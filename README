@@ -1,0 +1,9 @@
+INSTALLATION
+    $ sudo gem install sinatra
+    $ sudo gem install shotgun
+    $ sudo gem install grit
+    $ cp projects.yml.sample projects.yml
+
+STARTUP
+
+    $ shotgun app.rb

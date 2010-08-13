@@ -1,0 +1,3 @@
+project_slug:
+  path: /path/to/git/repo
+  name: ProjectName
