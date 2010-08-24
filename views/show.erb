@@ -1,5 +1,5 @@
 <h1><%= @project.name %></h1>
-
+<%= @project.path %>
 <h2>Untracked</h2>
 <ul>
 <% @project.status.untracked.each do |path, status| %>
