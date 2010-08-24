@@ -22,7 +22,7 @@ class Project
   
   def add_and_commit_all!(message)
     Dir.chdir(path) do
-      repo.status.untracked.map do |file, status|
+      untracked_files.map do |file, status|
         repo.add(file)
       end
       
@@ -30,12 +30,28 @@ class Project
     end
   end
   
-  def status
-    repo.status
+  def untracked_files
+    repo.status.untracked.map{|path, status| path}.reject do |path|
+      ignore_patterns.any?{|pattern| File.fnmatch?( pattern, path )}
+    end
+  end
+  
+  def changed_files
+    repo.status.changed.map{|path, status| path}
   end
   
   private
+  
   def repo
     @repo ||= Grit::Repo.new(path)
+  end
+  
+  def ignore_patterns
+    @ignore_patterns ||= File.read(File.join(path, '.gitignore')).  # read the gitignore file
+        to_a.                                                       # convert to array of lines
+        map{|p| p.sub(/^#.*/, '')}.                                 # remove comments
+        compact.                                                    # remove nils
+        map{|p| p.chomp}.
+        reject{|p| p == ''}                                         # remove empty lines
   end
 end

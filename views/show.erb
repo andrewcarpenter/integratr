@@ -2,14 +2,14 @@
 <%= @project.path %>
 <h2>Untracked</h2>
 <ul>
-<% @project.status.untracked.each do |path, status| %>
+<% @project.untracked_files.each do |path| %>
   <li><%= path %></li>
 <% end %>
 </ul>
 
 <h2>Changed</h2>
 <ul>
-<% @project.status.changed.each do |path, status| %>
+<% @project.changed_files.each do |path| %>
   <li><%= path %></li>
 <% end %>
 </ul>
