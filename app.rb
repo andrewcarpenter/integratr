@@ -24,7 +24,8 @@ post '/projects/:project_slug/commits' do
   
   commit_message = params[:message]
   if commit_message && commit_message != ''
-    result = @project.add_and_commit_all!(commit_message)
+    @project.add_and_commit_all!(commit_message)
+    @project.push!
     redirect "/projects/#{@project.slug}"
     erb :show
   else

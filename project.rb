@@ -30,6 +30,10 @@ class Project
     end
   end
   
+  def push!
+    `cd #{path} && git push origin integration` # TODO add error handling
+  end
+  
   def untracked_files
     repo.status.untracked.map{|path, status| path}.reject do |path|
       ignore_patterns.any?{|pattern| File.fnmatch?( pattern, path )}
