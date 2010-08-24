@@ -25,7 +25,7 @@ post '/projects/:project_slug/commits' do
   commit_message = params[:message]
   if commit_message && commit_message != ''
     result = @project.add_and_commit_all!(commit_message)
-    @notice_message = "Successfully committed!<pre>" + result + "</pre>"
+    redirect "/projects/#{@project.slug}"
     erb :show
   else
     @error_message = "You must enter a message to commit."
