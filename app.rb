@@ -10,12 +10,14 @@ get '/' do
 end
 
 get '/projects' do
+  @title = "All Projects"
   @projects = Project.all
   erb :index
 end
 
 get '/projects/:project_slug' do
   @project = Project.find(params[:project_slug]) or raise Sinatra::NotFound
+  @title = "Project: #{@project.name}"
   erb :show
 end
 
@@ -29,6 +31,7 @@ post '/projects/:project_slug/commits' do
     redirect "/projects/#{@project.slug}"
     erb :show
   else
+    @title = "Project: #{@project.name}"
     @error_message = "You must enter a message to commit."
     erb :show
   end

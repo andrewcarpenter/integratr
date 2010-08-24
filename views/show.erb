@@ -1,5 +1,5 @@
-<h1><%= @project.name %></h1>
 <%= @project.path %>
+
 <h2>Untracked</h2>
 <ul>
 <% @project.untracked_files.each do |path| %>
@@ -15,7 +15,7 @@
 </ul>
 
 <% if @error_message %>
-  <div class="error_message"><%= @error_message %></div>
+  <div id="flash_error"><%= @error_message %></div>
 <% end %>
 
 <form action="/projects/<%= @project.slug %>/commits" method="post">
