@@ -32,7 +32,7 @@ class Project
   end
   
   def push!
-    `cd #{path} && git push origin integration` # TODO add error handling
+    `cd #{path} && /usr/local/bin/git push origin integration` # TODO add error handling
   end
   
   def untracked_files
