@@ -14,6 +14,13 @@
 <% end %>
 </ul>
 
+<h2>Deleted</h2>
+<ul>
+<% @project.deleted_files.each do |path| %>
+  <li><%= path %></li>
+<% end %>
+</ul>
+
 <% if @error_message %>
   <div id="flash_error"><%= @error_message %></div>
 <% end %>

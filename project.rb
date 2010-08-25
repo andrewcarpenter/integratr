@@ -52,6 +52,10 @@ class Project
     repo.status.changed.map{|path, status| path}
   end
   
+  def deleted_files
+    repo.status.deleted.map{|path, status| path}
+  end
+  
   def recent_commits
     repo.commits('integration')
   end
