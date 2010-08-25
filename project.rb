@@ -1,3 +1,4 @@
+require 'yaml'
 class Project
   Grit.debug = true
   
