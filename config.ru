@@ -1,3 +1,5 @@
+ENV['PATH'] = "#{ENV['PATH']}:/usr/local/bin"
+
 require 'rubygems'
 require 'sinatra'
 require 'app'
