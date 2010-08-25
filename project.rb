@@ -45,6 +45,10 @@ class Project
     repo.status.changed.map{|path, status| path}
   end
   
+  def recent_commits
+    repo.commits('integration')
+  end
+  
   private
   
   def repo

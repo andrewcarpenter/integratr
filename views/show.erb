@@ -22,3 +22,10 @@
   <textarea name="message" rows="10" cols="40"><%= @message %></textarea>
   <input type="submit" value="Commit">
 </form>
+
+<h2>Recent Commits</h2>
+<ul>
+<% @project.recent_commits.each do |commit| %>
+  <li><a href="https://github.com/wested/<%= @project.slug %>/commit/<%= commit.id %>" target="_blank"><%= commit.message %></a></li>
+<% end %>
+</ul>
