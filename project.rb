@@ -35,6 +35,13 @@ class Project
     `cd #{path} && /usr/local/bin/git push origin integration` # TODO add error handling
   end
   
+  def checkout!
+    untracked_files.each do |file_name|
+      File.delete(File.join(path, file_name))
+    end
+    `cd #{path} && /usr/local/bin/git checkout .`
+  end
+  
   def untracked_files
     repo.status.untracked.map{|path, status| path}.reject do |path|
       ignore_patterns.any?{|pattern| File.fnmatch?( pattern, path )}

@@ -23,6 +23,10 @@
   <input type="submit" value="Commit">
 </form>
 
+<form action="/projects/<%= @project.slug %>/checkout" method="post">
+  <input type="submit" value="Revert all local changes" onclick="confirm('Are you sure you wish to throw out all changes since the last commit? This cannot be undone.')">
+</form>
+
 <h2>Recent Commits</h2>
 <ul>
 <% @project.recent_commits.each do |commit| %>

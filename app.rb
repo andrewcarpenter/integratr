@@ -21,6 +21,13 @@ get '/projects/:project_slug' do
   erb :show
 end
 
+post '/projects/:project_slug/checkout' do
+  @project = Project.find(params[:project_slug]) or raise Sinatra::NotFound
+  
+  @project.checkout!
+  redirect "/projects/#{@project.slug}"
+end
+
 post '/projects/:project_slug/commits' do
   @project = Project.find(params[:project_slug]) or raise Sinatra::NotFound
   
@@ -29,7 +36,6 @@ post '/projects/:project_slug/commits' do
     @project.add_and_commit_all!(commit_message)
     @project.push!
     redirect "/projects/#{@project.slug}"
-    erb :show
   else
     @title = "Project: #{@project.name}"
     @error_message = "You must enter a message to commit."
