@@ -1,5 +1,9 @@
 <ul>
   <% @projects.each do |project| %>
-    <li><a href="/projects/<%= project.slug %>"><%= project.name || project.slug %></a></li>
+    <li>
+      <a href="/projects/<%= project.slug %>"><%= project.name || project.slug %></a>
+      
+      [<a href="http://<%= project.slug %>.integation.ruby.wested.org" target="_blank">View Site</a>]
+    </li>
   <% end %>
 </ul>
