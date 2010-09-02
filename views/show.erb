@@ -4,14 +4,14 @@
 <h2>Untracked</h2>
 <ul>
 <% @project.untracked_files.each do |path| %>
-  <li><%= path %></li>
+  <li><a href="txmt://open?url=sftp://wei@integration.ruby.wested.org:/<%= @project.path %>/<%= path %>"><%= path %></a></li>
 <% end %>
 </ul>
 
 <h2>Changed</h2>
 <ul>
 <% @project.changed_files.each do |path| %>
-  <li><%= path %></li>
+  <li><a href="txmt://open?url=sftp://wei@integration.ruby.wested.org:/<%= @project.path %>/<%= path %>"><%= path %></a></li>
 <% end %>
 </ul>
 
