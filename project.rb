@@ -43,9 +43,7 @@ class Project
   end
   
   def untracked_files
-    repo.status.untracked.map{|path, status| path}.reject do |path|
-      ignore_patterns.any?{|pattern| File.fnmatch?( pattern, path )}
-    end
+    `cd #{path} && git ls-files --others --exclude-standard`.to_a.map(&:chomp)
   end
   
   def changed_files
@@ -64,14 +62,5 @@ class Project
   
   def repo
     @repo ||= Grit::Repo.new(path)
-  end
-  
-  def ignore_patterns
-    @ignore_patterns ||= File.read(File.join(path, '.gitignore')).  # read the gitignore file
-        to_a.                                                       # convert to array of lines
-        map{|p| p.sub(/^#.*/, '')}.                                 # remove comments
-        compact.                                                    # remove nils
-        map{|p| p.chomp}.
-        reject{|p| p == ''}                                         # remove empty lines
   end
 end
